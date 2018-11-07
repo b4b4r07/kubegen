@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/chzyer/readline"
+	"github.com/fatih/color"
 )
 
 // Prompt is
@@ -23,7 +24,7 @@ func New(title, defaultValue string, optional ...string) Prompt {
 		preEnteredValue = optional[0]
 	}
 	return Prompt{
-		Title:           title,
+		Title:           color.YellowString(title),
 		DefaultValue:    defaultValue,
 		PreEnteredValue: preEnteredValue,
 	}
