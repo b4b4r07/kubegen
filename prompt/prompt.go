@@ -16,6 +16,19 @@ type Prompt struct {
 	DefaultValue    string
 }
 
+// New is
+func New(title, defaultValue string, optional ...string) Prompt {
+	preEnteredValue := ""
+	if len(optional) > 0 {
+		preEnteredValue = optional[0]
+	}
+	return Prompt{
+		Title:           title,
+		DefaultValue:    defaultValue,
+		PreEnteredValue: preEnteredValue,
+	}
+}
+
 // Run is
 func (p Prompt) Run() (string, error) {
 	l, err := readline.NewEx(&readline.Config{

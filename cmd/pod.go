@@ -42,17 +42,14 @@ func podGenerator(cmd *cobra.Command, args []string) error {
 		return err
 	}
 
-	name, _ := prompt.Prompt{
-		Title:           "Name> ",
-		PreEnteredValue: "",
-		DefaultValue:    "POD_NAME",
-	}.Run()
-
-	image, _ := prompt.Prompt{
-		Title:           "Image> ",
-		PreEnteredValue: "",
-		DefaultValue:    "IMAGE_NAME",
-	}.Run()
+	name, err := prompt.New("Name> ", "POD_NAME").Run()
+	if err != nil {
+		return err
+	}
+	image, err := prompt.New("Image> ", "IMAGE_NAME").Run()
+	if err != nil {
+		return err
+	}
 
 	return tmpl.Execute(os.Stdout, &Pod{
 		Name:  name,
